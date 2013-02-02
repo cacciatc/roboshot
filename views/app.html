@@ -61,20 +61,20 @@
 						<div class="row">
 							<div class="span8">
 								<div class="well">
-									<p style="margin-top:34px;color:#777">If all goes according to plan, then this is where your pic will live...</p>
+									<p id="theplan" style="margin-top:34px;color:#777">If all goes according to plan, then this is where your pic will live...</p>
 									<div id="main-pic">
-										<img ng-src="{{pics[0]}}" class="img"/>	
+										<a ng-href="{{pics[0].url}}"><img class="img-rounded" ng-src="{{pics[0].url}}" class="img"/></a>	
 									</div>	
 								</div>
 							</div>
 							<div class="span3">
 								<ul class="unstyled">
 									<li class="well">
-										<img ng-src="{{pics[1]}}" class="img"/></li>	
+										<a ng-href="{{pics[1].thumb.url}}"><img class="img-rounded" ng-src="{{pics[1].thumb.url}}" class="img"/></li></a>
 									<li class="well">	
-										<img ng-src="{{pics[2]}}" class="img"/></li>	
+										<a ng-href="{{pics[2].thumb.url}}"><img class="img-rounded" ng-src="{{pics[2].thumb.url}}" class="img"/></li></a>
 									<li class="well">	
-										<img ng-src="{{pics[3]}}" class="img"/></li>	
+										<a ng-href="{{pics[3].thumb.url}}"><img class="img-rounded" ng-src="{{pics[3].thumb.url}}" class="img"/></li></a>
 								</ul>	
 							</div>
 						</div>
@@ -104,12 +104,19 @@
 			});	
 		
 			function MainCtrl($scope,$http){
+				$scope.shiftPics = function(newpic){
+					$scope.pics[3] = $scope.pics[2];
+					$scope.pics[2] = $scope.pics[1];
+					$scope.pics[1] = $scope.pics[0];
+					$scope.pics[0] = newpic;
+				}
 				$scope.grabPic = function(){
 					$("#main-processing").removeClass("icon-globe");
 					$("#main-processing").addClass("icon-spinner icon-spin");
 					
 					$http.post("api/pics",JSON.stringify({url:$scope.url})).success(function(d){
-						alert("woot");
+						$("#theplan").hide();
+						$scope.shiftPics(d);
 						$("#main-processing").removeClass("icon-spinner icon-spin");
 						$("#main-processing").addClass("icon-globe");
 					}).error(function(d){
@@ -118,7 +125,24 @@
 						$("#main-processing").addClass("icon-globe");
 					});
 				}
-				$scope.pics = ['/img/pic-placeholder-big.png','/img/pic-placeholder-sm.png','/img/pic-placeholder-sm.png','/img/pic-placeholder-sm.png'];	
+				$scope.pics = [
+				{
+					url:'/img/pic-placeholder-big.png',
+					thumb:{url:'/img/pic-placeholder-sm.png'},
+				},
+				{
+					url:'/img/pic-placeholder-big.png',
+					thumb:{url:'/img/pic-placeholder-sm.png'},
+				},
+				{
+					url:'/img/pic-placeholder-big.png',
+					thumb:{url:'/img/pic-placeholder-sm.png'},
+				},
+				{
+					url:'/img/pic-placeholder-big.png',
+					thumb:{url:'/img/pic-placeholder-sm.png'},
+				}
+				];
 			}
 		</script>
 	</body>

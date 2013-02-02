@@ -4,12 +4,13 @@ function renderURL(callback){
  
 	var url       = system.args[1];
 	
-	page.settings.userAgent = "Scrnshot";
+	page.settings.userAgent = "Roboshot";
 	page.open(url, function(status){
 		if(status !== "success"){
 			console.log("Unable to render '"+url+"'");
 		}
 		else{
+			//page.viewportSize = { width: 1024, height: 2048 };
 			page.render(system.args[2]);
 		}
 		delete page;

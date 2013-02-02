@@ -1,7 +1,29 @@
 require 'grape'
 require './phantom/phantom'
+require 'carrierwave'
 
 module API
+	class ImageUploader < CarrierWave::Uploader::Base 
+  	include CarrierWave::MiniMagick
+		if ENV['production']
+    	storage :s3 
+  	else 
+    	storage :file 
+  	end 
+ 
+  	def store_dir 
+    	"tmp/" 
+  	end 
+ 
+  	def extensions_white_list 
+    	%w(png) 
+  	end
+
+		version :thumb do
+    	process :resize_to_fill => [300,300]
+	  end
+	end
+
 	class Roboshot < Grape::API
 		version "v1", :using => :header, :vendor => "Scrnshot"
 		format :json
@@ -14,7 +36,9 @@ module API
 			post do
 				fname = "tmp/#{Time.now.to_i}.png"
 				Phantomjs.run_phantom params[:url], fname
-				fname
+				up = ImageUploader.new
+				up.store!(File.open(fname,'rb'))
+				{:url => up.url,:thumb => {:url => up.thumb.url}}.to_json
 			end
 		end
 	end
