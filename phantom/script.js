@@ -10,7 +10,6 @@ function renderURL(callback){
 			console.log("Unable to render '"+url+"'");
 		}
 		else{
-			//page.viewportSize = { width: 1024, height: 2048 };
 			page.render(system.args[2]);
 		}
 		delete page;

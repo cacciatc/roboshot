@@ -25,7 +25,7 @@ module API
 	end
 
 	class Roboshot < Grape::API
-		version "v1", :using => :header, :vendor => "Scrnshot"
+		version "v1", :using => :header, :vendor => "Roboshot"
 		format :json
 
 		resource :pics do
