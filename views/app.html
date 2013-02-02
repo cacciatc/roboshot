@@ -32,19 +32,6 @@
    			-webkit-transition: opacity 1s ease-in;
 				opacity:0.3;
 			}
-			.no-pic-fade {
-				opacity:0.7;
-			}
-			.big-pic{
-				font-size:1500%;
-			}
-			.shrink{
-				 transition: font-size padding-top 1s ease-in;
-        -moz-transition: font-size padding-top 1s ease-in;
-        -webkit-transition: font-size padding-top 1s ease-in;
-        font-size:800%;
-				padding-top:34px;
-			}
 		</style>
 	</head>
 	<body ng-controller="MainCtrl">
@@ -63,9 +50,11 @@
 			<div class="row">
 				<div class="span12">
 					<div class="box" align="center">
-						<h2 style="color:#777;">Enter a web address 
+						<h2 style="color:#777;">
+							<i id="main-processing" class="icon-globe" style="padding-right:8px;"></i>
+							Enter a web address 
 							<span style="padding-left:13px;">
-								<input class="input input-xxlarge" type="url" style="font-size:21px;line-height:25px;padding-top:13px;padding-bottom:13px;padding-left:13px;" placeholder="http://www.example.com" enter-keypress="grabPic()" ng-model="url"></input>
+								<input class="input input-xxlarge" type="url" style="margin-right:34px;font-size:21px;line-height:25px;padding-top:13px;padding-bottom:13px;padding-left:13px;" placeholder="http://www.example.com" enter-keypress="grabPic()" ng-model="url"></input>
 							</span>
 						</h2>
 						<div style="padding-bottom:34px;"></div>
@@ -73,21 +62,19 @@
 							<div class="span8">
 								<div class="well">
 									<p style="margin-top:34px;color:#777">If all goes according to plan, then this is where your pic will live...</p>
-									<h1 style="margin-top:-34px;">
-										<div id="main-pic" class="no-pic-fade big-pic">
-											<i id="main-pic-icon" class="icon-picture" style="color:#bbb;"></i>
-										</div>	
-									</h1>
+									<div id="main-pic">
+										<img ng-src="{{pics[0]}}" class="img"/>	
+									</div>	
 								</div>
 							</div>
 							<div class="span3">
 								<ul class="unstyled">
 									<li class="well">
-										<h1><i class="icon-picture icon-4x no-pic-fade" style="color:#bbb;"></i></h1></li>	
+										<img ng-src="{{pics[1]}}" class="img"/></li>	
 									<li class="well">	
-										<h1><i class="icon-picture icon-4x no-pic-fade" style="color:#bbb;"></i></h1></li>	
+										<img ng-src="{{pics[2]}}" class="img"/></li>	
 									<li class="well">	
-										<h1><i class="icon-picture icon-4x no-pic-fade" style="color:#bbb;"></i></h1></li>	
+										<img ng-src="{{pics[3]}}" class="img"/></li>	
 								</ul>	
 							</div>
 						</div>
@@ -118,21 +105,20 @@
 		
 			function MainCtrl($scope,$http){
 				$scope.grabPic = function(){
-					$("#main-pic").removeClass("no-pic-fade");
-					$("#main-pic").addClass("proc-fade");
-					$("#main-pic-icon").removeClass("icon-picture");
-					$("#main-pic").addClass("shrink");
-					$("#main-pic-icon").addClass("icon-spinner icon-spin");
+					$("#main-processing").removeClass("icon-globe");
+					$("#main-processing").addClass("icon-spinner icon-spin");
 					
 					$http.post("api/pics",JSON.stringify({url:$scope.url})).success(function(d){
 						alert("woot");
-						$("#main-pic").removeClass("proc-fade");
-						$("#main-pic-icon").removeClass("icon-spinner icon-spin");
+						$("#main-processing").removeClass("icon-spinner icon-spin");
+						$("#main-processing").addClass("icon-globe");
 					}).error(function(d){
 						alert("problems");
+						$("#main-processing").removeClass("icon-spinner icon-spin");
+						$("#main-processing").addClass("icon-globe");
 					});
 				}
-				$scope.pics = [];	
+				$scope.pics = ['/img/pic-placeholder-big.png','/img/pic-placeholder-sm.png','/img/pic-placeholder-sm.png','/img/pic-placeholder-sm.png'];	
 			}
 		</script>
 	</body>
