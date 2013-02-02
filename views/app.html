@@ -1,51 +1,127 @@
 <!DOCTYPE html>
-<html ng-app="scrshot">
+<html ng-app="roboshot">
 	<head>
-		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-		<link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap.no-icons.min.css" rel="stylesheet">
 		<link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
 		<style>
-			body {
-				font-family: 'Lora', 'sans serif';
+			body{
+				font-family:'Lora', 'sans serif';
+				background:url('/img/kindajean.png');
+			}
+			.input {
+				font-family:'Lora', 'sans serif';
+			}
+			.blue-shade {
+				text-shadow:black 0px 0px 5px;
+				color:#21aeff;
+			}
+			.box
+			{
+				position: relative;
+				padding: 50px;
+				margin: 0 auto;
+				background-color: #fff;
+				-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+				-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+				box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+			}
+			.proc-fade {
+				transition: opacity 1s ease-in;
+   			-moz-transition: opacity 1s ease-in;
+   			-webkit-transition: opacity 1s ease-in;
+				opacity:0.3;
+			}
+			.no-pic-fade {
+				opacity:0.7;
 			}
 		</style>
 	</head>
-	<body ng-controller="ContentCtrl" style="background:url('/img/kindajean.png');">
+	<body ng-controller="MainCtrl">
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
-					<a class="brand" href="/">ScrShot</a>
-					<ul class="nav pull-right">
-						<li><h4><a style="text-decoration:none;" href="mailto:chris.cacciatore@dullahansoft.com"><i class="icon-envelope-alt"></i></a></h4></li>
-					</ul>
+					<div class="row">
+						<div class="span12">
+							<a class="brand big-brand" href="/"><h1><i class="icon-camera-retro blue-shade"></i> Roboshot</h1></a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<section id="content" class="container" style="padding-top:89px;">
+		<section class="container" style="padding-top:150px;">
 			<div class="row">
-				<div class="span12 well">
-					<h2 class="page-header">Free webshots for all</h2>
-					<form class="form-horizontal">
-						<h3><i class="icon-globe"></i> Enter a URL</h3>
-						<input class="input input-xxlarge" type="url" name="url" ng-model="url" placeholder="http://www.example.com">
-						<button class="btn btn-warn" ng-click="grab()">Take snapshot</button>	
-						<h3 style="padding-top:34px;"><i class="icon-magic"></i> Look at the magic</h3>
-						<img ng-src="{{pic_url}}" class="img-rounded" />
-					</form>
+				<div class="span12">
+					<div class="box" align="center">
+						<h2 style="color:#777;">Enter a web address 
+							<span style="padding-left:13px;">
+								<input class="input input-xxlarge" type="url" style="font-size:21px;line-height:25px;padding-top:13px;padding-bottom:13px;padding-left:13px;" placeholder="http://www.example.com" enter-keypress="grabPic()" ng-model="url"></input>
+							</span>
+						</h2>
+						<div style="padding-bottom:34px;"></div>
+						<div class="row">
+							<div class="span8">
+								<div class="well">
+									<p style="margin-top:34px;color:#777">If all goes according to plan, then this is where your pic will live...</p>
+									<h1 style="font-size:4000%;margin-top:-34px;">
+										<div id="main-pic" class="no-pic-fade">
+											<i id="main-pic-icon" class="icon-picture" style="color:#bbb;"></i>
+										</div>	
+									</h1>
+								</div>
+							</div>
+							<div class="span3">
+								<ul class="unstyled">
+									<li class="well">
+										<h1><i class="icon-picture icon-4x no-pic-fade" style="color:#bbb;"></i></h1></li>	
+									<li class="well">	
+										<h1><i class="icon-picture icon-4x no-pic-fade" style="color:#bbb;"></i></h1></li>	
+									<li class="well">	
+										<h1><i class="icon-picture icon-4x no-pic-fade" style="color:#bbb;"></i></h1></li>	
+								</ul>	
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</section>	
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		</section>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
 		<script>
-			angular.module("scrshot",[]);
-			function ContentCtrl($scope, $http){
-				$scope.grab = function(){
+			var app = angular.module("roboshot",[]);
+			
+			app.directive('enterKeypress', function(){
+  			return {
+    			restrict: 'A',
+    			link: function(scope, elem, attr, ctrl) {
+      			elem.bind('keypress', function(event){
+							if(event.which == 13){
+        				scope.$apply(function(s) {
+         	 				s.$eval(attr.enterKeypress);
+        				});
+							}
+      			});
+    			}
+  			};
+			});	
+		
+			function MainCtrl($scope,$http){
+				$scope.grabPic = function(){
+					$("#main-pic").removeClass("no-pic-fade");
+					$("#main-pic").addClass("proc-fade");
+					$("#main-pic-icon").removeClass("icon-picture");
+					$("#main-pic-icon").addClass("icon-spinner icon-spin");
+					
 					$http.post("api/pics",JSON.stringify({url:$scope.url})).success(function(d){
-						$scope.pic_url = d;
+						alert("woot");
+						$("#main-pic").removeClass("proc-fade");
+						$("#main-pic-icon").removeClass("icon-spinner icon-spin");
+					}).error(function(d){
+						alert("problems");
 					});
 				}
+				$scope.pics = [];	
 			}
 		</script>
 	</body>

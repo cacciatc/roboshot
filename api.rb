@@ -2,7 +2,7 @@ require 'grape'
 require './phantom/phantom'
 
 module API
-	class Scrnshot < Grape::API
+	class Roboshot < Grape::API
 		version "v1", :using => :header, :vendor => "Scrnshot"
 		format :json
 
