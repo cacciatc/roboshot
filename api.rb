@@ -5,7 +5,7 @@ require 'carrierwave'
 module API
 	class ImageUploader < CarrierWave::Uploader::Base 
   	include CarrierWave::MiniMagick
-		if ENV['production']
+		if ENV['RACK_ENV'] == 'production'
     	storage :s3 
   	else 
     	storage :file 
