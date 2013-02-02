@@ -35,6 +35,16 @@
 			.no-pic-fade {
 				opacity:0.7;
 			}
+			.big-pic{
+				font-size:1500%;
+			}
+			.shrink{
+				 transition: font-size padding-top 1s ease-in;
+        -moz-transition: font-size padding-top 1s ease-in;
+        -webkit-transition: font-size padding-top 1s ease-in;
+        font-size:800%;
+				padding-top:34px;
+			}
 		</style>
 	</head>
 	<body ng-controller="MainCtrl">
@@ -63,8 +73,8 @@
 							<div class="span8">
 								<div class="well">
 									<p style="margin-top:34px;color:#777">If all goes according to plan, then this is where your pic will live...</p>
-									<h1 style="font-size:4000%;margin-top:-34px;">
-										<div id="main-pic" class="no-pic-fade">
+									<h1 style="margin-top:-34px;">
+										<div id="main-pic" class="no-pic-fade big-pic">
 											<i id="main-pic-icon" class="icon-picture" style="color:#bbb;"></i>
 										</div>	
 									</h1>
@@ -111,6 +121,7 @@
 					$("#main-pic").removeClass("no-pic-fade");
 					$("#main-pic").addClass("proc-fade");
 					$("#main-pic-icon").removeClass("icon-picture");
+					$("#main-pic").addClass("shrink");
 					$("#main-pic-icon").addClass("icon-spinner icon-spin");
 					
 					$http.post("api/pics",JSON.stringify({url:$scope.url})).success(function(d){
