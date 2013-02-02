@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="scrshot">
+	<head>
+		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+		<link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+		<style>
+			body {
+				font-family: 'Lora', 'sans serif';
+			}
+		</style>
+	</head>
+	<body ng-controller="ContentCtrl" style="background:url('/img/kindajean.png');">
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="brand" href="/">ScrShot</a>
+					<ul class="nav pull-right">
+						<li><h4><a style="text-decoration:none;" href="mailto:chris.cacciatore@dullahansoft.com"><i class="icon-envelope-alt"></i></a></h4></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<section id="content" class="container" style="padding-top:89px;">
+			<div class="row">
+				<div class="span12 well">
+					<h2 class="page-header">Free webshots for all</h2>
+					<form class="form-horizontal">
+						<h3><i class="icon-globe"></i> Enter a URL</h3>
+						<input class="input input-xxlarge" type="url" name="url" ng-model="url" placeholder="http://www.example.com">
+						<button class="btn btn-warn" ng-click="grab()">Take snapshot</button>	
+						<h3 style="padding-top:34px;"><i class="icon-magic"></i> Look at the magic</h3>
+						<img ng-src="{{pic_url}}" class="img-rounded" />
+					</form>
+				</div>
+			</div>
+		</section>	
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+		<script>
+			angular.module("scrshot",[]);
+			function ContentCtrl($scope, $http){
+				$scope.grab = function(){
+					$http.post("api/pics",JSON.stringify({url:$scope.url})).success(function(d){
+						$scope.pic_url = d;
+					});
+				}
+			}
+		</script>
+	</body>
+</html>
