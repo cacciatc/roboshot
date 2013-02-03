@@ -28,9 +28,9 @@
 			}
 			.fimg
       {
-            -webkit-transition: opacity 0.5s ease-in;
-            -moz-transition: opacity 0.5s ease-in;
-            -o-transition: opacity 0.5s ease-in;
+            -webkit-transition: opacity 1s ease-in;
+            -moz-transition: opacity 1s ease-in;
+            -o-transition: opacity 1s ease-in;
         }
         .fade-out
         {
@@ -121,21 +121,15 @@
 				$scope.grabPic = function(){
 					$("#main-processing").removeClass("icon-globe");
 					$("#main-processing").addClass("icon-spinner icon-spin");
+					$('.fimg').removeClass('fade-in');
 					
 					$http.post("api/pics",JSON.stringify({url:$scope.url})).success(function(d){
 						$("#theplan").hide();
-
-						$('.fimg').removeClass('fade-in');
-						$('.fimg').addClass('fade-out');
-
 						$scope.shiftPics(d);
 						$("#main-processing").removeClass("icon-spinner icon-spin");
 						$("#main-processing").addClass("icon-globe");
-						$('.fimg').removeClass('fade-out');
-						$('.fimg').addClass('fade-int');
+						$('.fimg').addClass('fade-in');
 					}).error(function(d){
-						$('.fimg').removeClass('fade-out');
-						$('.fimg').addClass('fade-int');
 						$("#main-processing").removeClass("icon-spinner icon-spin");
 						$("#main-processing").addClass("icon-globe");
 					});
