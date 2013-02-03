@@ -100,15 +100,12 @@
 			app.directive('coolFade', function() {
 				return {
 					link: function(scope,elm,attr,ctrl){
-        		$(elm).css('opacity', 0.0);
-       			$(elm).animate({ opacity : 1.0 }, 1000 );
-					},
-    			compile: function(elm) {
-        		$(elm).css('opacity', 0.0);
-        		return function(scope, elm, attrs) {
+						// watch the expression, and update the UI on change.
+      			scope.$watch(scope.pics[0], function() {
+        			$(elm).css('opacity', 0.0);
        				$(elm).animate({ opacity : 1.0 }, 1000 );
-       	 		};
-     			}
+      			});
+					}
    			};
 			});
 	
