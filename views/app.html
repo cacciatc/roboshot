@@ -26,20 +26,6 @@
 				-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
 				box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
 			}
-			.fimg
-      {
-            -webkit-transition: opacity 1s ease-in;
-            -moz-transition: opacity 1s ease-in;
-            -o-transition: opacity 1s ease-in;
-        }
-        .fade-out
-        {
-            opacity:0;
-        }
-        .fade-in
-        {
-            opacity:1;
-        }
 		</style>
 	</head>
 	<body ng-controller="MainCtrl">
@@ -71,18 +57,18 @@
 								<div class="well">
 									<p id="theplan" style="margin-top:34px;color:#777">If all goes according to plan, then this is where your pic will live...</p>
 									<div id="main-pic">
-										<a ng-href="{{pics[0].url}}"><img class="img-rounded fimg fade-out" ng-src="{{pics[0].url}}" class="img"/></a>	
+										<a ng-href="{{pics[0].url}}"><img class="img-rounded" ng-src="{{pics[0].url}}" cool-fade/></a>	
 									</div>	
 								</div>
 							</div>
 							<div class="span3">
 								<ul class="unstyled">
 									<li class="well">
-										<a ng-href="{{pics[1].url}}"><img class="img-rounded fimg fade-out" ng-src="{{pics[1].thumb.url}}" class="img"/></li></a>
+										<a ng-href="{{pics[1].url}}"><img class="img-rounded" ng-src="{{pics[1].thumb.url}}" cool-fade/></li></a>
 									<li class="well">	
-										<a ng-href="{{pics[2].url}}"><img class="img-rounded fimg fade-out" ng-src="{{pics[2].thumb.url}}" class="img"/></li></a>
+										<a ng-href="{{pics[2].url}}"><img class="img-rounded" ng-src="{{pics[2].thumb.url}}" cool-fade/></li></a>
 									<li class="well">	
-										<a ng-href="{{pics[3].url}}"><img class="img-rounded fimg fade-out" ng-src="{{pics[3].thumb.url}}" class="img"/></li></a>
+										<a ng-href="{{pics[3].url}}"><img class="img-rounded" ng-src="{{pics[3].thumb.url}}" cool-fade/></li></a>
 								</ul>	
 							</div>
 						</div>
@@ -110,7 +96,18 @@
     			}
   			};
 			});	
-		
+	
+			app.directive('coolFade', function() {
+				return {
+    			compile: function(elm) {
+        		$(elm).css('opacity', 0.0);
+        		return function(scope, elm, attrs) {
+       				$(elm).animate({ opacity : 1.0 }, 1000 );
+       	 		};
+     			}
+   			};
+			});
+	
 			function MainCtrl($scope,$http){
 				$scope.shiftPics = function(newpic){
 					$scope.pics[3] = $scope.pics[2];
