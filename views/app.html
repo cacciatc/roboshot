@@ -57,7 +57,7 @@
 								<div class="well">
 									<p id="theplan" style="margin-top:34px;color:#777">If all goes according to plan, then this is where your pic will live...</p>
 									<div id="main-pic">
-										<a ng-href="{{pics[0].url}}"><img class="img-rounded" ng-src="{{pics[0].url}}" cool-fade/></a>	
+										<a ng-href="{{pics[0].url}}"><img class="img-rounded" ng-src="{{pics[0].url}}" cool-fade/></a>
 									</div>	
 								</div>
 							</div>
@@ -99,6 +99,12 @@
 	
 			app.directive('coolFade', function() {
 				return {
+					link: function(scope,elm,attr,ctrl){
+        		$(elm).css('opacity', 0.0);
+        		return function(scope, elm, attrs) {
+       				$(elm).animate({ opacity : 1.0 }, 1000 );
+       	 		};
+					},
     			compile: function(elm) {
         		$(elm).css('opacity', 0.0);
         		return function(scope, elm, attrs) {
@@ -118,14 +124,12 @@
 				$scope.grabPic = function(){
 					$("#main-processing").removeClass("icon-globe");
 					$("#main-processing").addClass("icon-spinner icon-spin");
-					$('.fimg').removeClass('fade-in');
 					
 					$http.post("api/pics",JSON.stringify({url:$scope.url})).success(function(d){
 						$("#theplan").hide();
 						$scope.shiftPics(d);
 						$("#main-processing").removeClass("icon-spinner icon-spin");
 						$("#main-processing").addClass("icon-globe");
-						$('.fimg').addClass('fade-in');
 					}).error(function(d){
 						$("#main-processing").removeClass("icon-spinner icon-spin");
 						$("#main-processing").addClass("icon-globe");
@@ -150,10 +154,6 @@
 				}
 				];
 			}
-			$().ready(function(){
-				$('.fimg').removeClass('fade-out');
-				$('.fimg').addClass('fade-in');
-			});
 		</script>
 	</body>
 </html>
