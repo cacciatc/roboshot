@@ -120,7 +120,7 @@
 					$("#main-processing").removeClass("icon-globe");
 					$("#main-processing").addClass("icon-spinner icon-spin");
 					
-					$http.post("api/pics",JSON.stringify({url:$scope.url})).success(function(d){
+					$http.post("api/pics",JSON.stringify({url:$scope.url,user:'sac',password:'ruby'})).success(function(d){
 						$("#theplan").hide();
 						$scope.shiftPics(d);
 						$("#main-processing").removeClass("icon-spinner icon-spin");
