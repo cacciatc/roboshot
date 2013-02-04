@@ -1,6 +1,7 @@
 RoboShot
 ========
 
+An unoriginal web app that snaps screenshots of webpages and then displays the results.
 
 ## Presentation Sketch
 
@@ -69,7 +70,7 @@ Questions?
 
 Questions?
 
-#### Next Steps
+#### Next Steps (Some of which are already live)
 
 * Add Unicorn for better concurrency.
 * Add HTTP basic auth
