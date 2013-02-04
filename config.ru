@@ -1,3 +1,4 @@
+
 require './app'
 require './api'
 
@@ -8,9 +9,6 @@ use Rack::Static, :urls => ['/carrierwave'], :root => 'tmp'
 
 run Rack::URLMap.new  "/" => Sinatra::Application, "/api" => API::Roboshot
 
-configure :production do
-  require 'newrelic_rpm'
-end
 
 CarrierWave.configure do |config|
   config.root = '/tmp'
