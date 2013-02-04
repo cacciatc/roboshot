@@ -6,22 +6,22 @@ module API
 	class ImageUploader < CarrierWave::Uploader::Base 
   	include CarrierWave::MiniMagick
 		if ENV['RACK_ENV'] == 'production'
-    	storage :s3 
-  	else 
-    	storage :file 
-  	end 
+    			storage :s3 
+  		else 
+    			storage :file 
+	  	end 
  
-  	def store_dir 
-    	"tmp/" 
-  	end 
+  		def store_dir 
+    			"tmp/" 
+	  	end 
  
-  	def extensions_white_list 
-    	%w(png) 
-  	end
+  		def extensions_white_list 
+    			%w(png) 
+  		end
 
 		version :thumb do
-    	process :resize_to_fill => [300,300]
-	  end
+    			process :resize_to_fill => [300,300]
+		end
 	end
 
 	class Roboshot < Grape::API
@@ -39,6 +39,13 @@ module API
 				up = ImageUploader.new
 				up.store!(File.open(fname,'rb'))
 				{:url => up.url,:thumb => {:url => up.thumb.url}}.to_json
+			end
+		end
+		http_basic do |user, password|
+  			if user == 'sac' and password == 'ruby'
+				true
+			else
+				false
 			end
 		end
 	end
