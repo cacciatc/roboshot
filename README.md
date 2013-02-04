@@ -20,9 +20,9 @@ to experiment with PhantomJS's screenshot abilities.
 * PhantomJS
 * Unicorn
 
-So for this walk-through we will keep the front-end and throw away most everything else--to be implemented again.
+#### How's This Going To Work?
 
-We will rebuild Robo's backend in three installments:
+For this walk-through we will keep the front-end and throw away most everything else--to be implemented again. We will rebuild Robo's backend in three installments:
 
 * Install gems, copy front-end, serve front-end
 * PhantomJS, API
@@ -30,7 +30,7 @@ We will rebuild Robo's backend in three installments:
 
 After each section I will ask for questions, so please save any you may have till one of those breaks.
 
-Questions now?
+__Questions now?__
 
 #### Install Gems, Copy Front-end, Serve It
 
@@ -43,7 +43,7 @@ Questions now?
 7. Demonstrate the page is served.
 8. Git init, git add ., git commit -m "first round."
 
-Questions?
+__Questions?__
 
 #### PhantomJS, API
 
@@ -58,7 +58,7 @@ Questions?
 9. Run api and curl demo
 10. Git init, git add ., git commit -m "second round."
 
-Questions?
+__Questions?__
 
 #### Rack glue, Unicorn, deployment
 
@@ -68,7 +68,7 @@ Questions?
 4. git push heroku master
 5. Test it out.
 
-Questions?
+__Questions?__
 
 #### Next Steps (Some of which are already live)
 
@@ -78,5 +78,7 @@ Questions?
 * Push the screenshot logic into workers. (although unicorn helps us quite a bit).
 * Code for RoboShot is on github at https://github.com/cacciatc/roboshot.
 
-Questions?
+Thanks for listening. I'm Chris Cacciatore from Dullahan Software.
+
+__Questions?__
 
