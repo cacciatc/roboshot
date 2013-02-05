@@ -3,34 +3,38 @@ RoboShot
 
 An unoriginal web app that snaps screenshots of webpages and then displays the results.
 
+<img src="https://raw.github.com/cacciatc/roboshot/master/public/img/robo.png" />
+
 ## Presentation Sketch
 
 ### Building A Rack Backend In 30 Minutes
-Wherein Chris demonstrates the ease of building a small Rack-based app and deploying on Heroku.
+_Wherein Chris demonstrates the ease of building and deploying a small Rack-based app to Heroku._
 
 This is RoboShot an unoriginal web app that snaps screenshots of webpages and then displays the results. I built him
 to experiment with PhantomJS's screenshot abilities.
 
 #### Robo's parts list:
 
-* AngularJS
-* Sinatra
-* Grape
-* CarrierWave + Fog + MiniMagick
-* PhantomJS
-* Unicorn
+* [AngularJS](http://angularjs.org/)
+* [Sinatra](http://www.sinatrarb.com/)
+* [Grape](https://github.com/intridea/grape)
+* [CarrierWave](https://github.com/jnicklas/carrierwave) + [Fog](http://fog.io/) + [MiniMagick](https://github.com/probablycorey/mini_magick)
+* [PhantomJS](http://phantomjs.org/)
+* [Unicorn](http://unicorn.bogomips.org/)
 
 #### How's This Going To Work?
 
-For this walk-through we will keep the front-end and throw away most everything else--to be implemented again. We will rebuild Robo's backend in three installments:
+For this walk-through we will keep the front-end and throw away most everything else. 
+We will then rebuild Robo's backend in three installments:
 
 * Install gems, copy front-end, serve front-end
 * PhantomJS, API
 * Rack glue, unicorn, deployment
 
-After each section I will ask for questions, so please save any you may have till one of those breaks.
+After each section I will ask for questions, so please save any you may have till one of those breaks. 
+Now would be one of those breaks.
 
-__Questions now?__
+__Questions?__
 
 #### Install Gems, Copy Front-end, Serve It
 
