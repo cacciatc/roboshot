@@ -74,13 +74,15 @@ __Questions?__
 
 __Questions?__
 
-#### Next Steps (Some of which are already live)
+#### Exercises For The Reader
 
 * Add Unicorn for better concurrency.
 * Add HTTP basic auth
 * API throttling (a couple rack middle wares out there, but many are no longer actively maintained)
 * Push the screenshot logic into workers. (although unicorn helps us quite a bit).
-* Code for RoboShot is on github at https://github.com/cacciatc/roboshot.
+ 
+
+Code for RoboShot is on github at https://github.com/cacciatc/roboshot.
 
 Thanks for listening. I'm Chris Cacciatore from [Dullahan Software](http://www.dullahansoft.com/).
 
