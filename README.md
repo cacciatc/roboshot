@@ -28,8 +28,8 @@ For this walk-through we will keep the front-end and throw away most everything 
 We will then rebuild Robo's backend in three installments:
 
 * Install gems, copy front-end, serve front-end
-* PhantomJS, API
-* Rack glue, unicorn, deployment
+* PhantomJS & API
+* Rack glue & deployment
 
 After each section I will ask for questions, so please save any you may have till one of those breaks. 
 Now would be one of those breaks.
@@ -49,7 +49,7 @@ __Questions?__
 
 __Questions?__
 
-#### PhantomJS, API
+#### PhantomJS & API
 
 1. cp PhantomJS (bin & phantom dirs)
 2. ls bin.
@@ -64,7 +64,7 @@ __Questions?__
 
 __Questions?__
 
-#### Rack glue, Unicorn, deployment
+#### Rack glue & Deployment
 
 1. Create config.ru
 2. Rackup
