@@ -82,7 +82,9 @@ __Questions?__
 * Push the screenshot logic into workers. (although unicorn helps us quite a bit).
 * Code for RoboShot is on github at https://github.com/cacciatc/roboshot.
 
-Thanks for listening. I'm Chris Cacciatore from Dullahan Software.
+Thanks for listening. I'm Chris Cacciatore from [Dullahan Software](http://www.dullahansoft.com/).
+
+<img height=200 src="https://secure.gravatar.com/avatar/0c074910b20154ca0b2244ac1d56c176?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-org-420.png"/>
 
 __Questions?__
 
